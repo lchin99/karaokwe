@@ -15,7 +15,8 @@ Group.init({
   }
 }, {
   sequelize,
-  modelName: 'group'
+  modelName: 'group',
+  timestamps: false
 })
 
 module.exports = Group;
