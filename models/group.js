@@ -1,5 +1,5 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('mysql2');
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('./sequelize')
 
 class Group extends Model { }
 Group.init({
@@ -17,3 +17,5 @@ Group.init({
   sequelize,
   modelName: 'group'
 })
+
+module.exports = Group;
