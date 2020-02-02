@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,19 +13,19 @@ import { Button, Card, Wrapper } from "../components/Base/basecomponents";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: "50%",
-      maxWidth: 300
+        margin: theme.spacing(1),
+        minWidth: "50%",
+        maxWidth: 300
     },
     chips: {
-      display: "flex",
-      flexWrap: "wrap"
+        display: "flex",
+        flexWrap: "wrap"
     },
     chip: {
-      margin: 2
+        margin: 2
     },
     noLabel: {
-      marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3)
     }
 }));
 
@@ -70,21 +71,21 @@ const CreateRoom = () => {
                     input={<Input id="select-multiple-chip" />}
                     renderValue={selected => (
                         <div className={classes.chips}>
-                        {selected.map(value => (
-                            <Chip key={value} label={value} />
-                        ))}
+                            {selected.map(value => (
+                                <Chip key={value} label={value} />
+                            ))}
                         </div>
                     )}
-                    >
+                >
                     {getGenres().map(genre => (
                         <MenuItem
-                        key={genre}
-                        value={genre}
+                            key={genre}
+                            value={genre}
                         >
-                        {genre}
+                            {genre}
                         </MenuItem>
                     ))}
-                    </Select>
+                </Select>
             </FormControl>
             <h4>Languages</h4>
             <FormControl className={classes.formControl}>
@@ -97,23 +98,23 @@ const CreateRoom = () => {
                     input={<Input id="select-multiple-chip" />}
                     renderValue={selected => (
                         <div className={classes.chips}>
-                        {selected.map(value => (
-                            <Chip key={value} label={value} />
-                        ))}
+                            {selected.map(value => (
+                                <Chip key={value} label={value} />
+                            ))}
                         </div>
                     )}
-                    >
+                >
                     {getLanguages().map(language => (
                         <MenuItem
-                        key={language}
-                        value={language}
+                            key={language}
+                            value={language}
                         >
-                        {language}
+                            {language}
                         </MenuItem>
                     ))}
-                    </Select>
+                </Select>
             </FormControl>
-            
+
             <Link to={{
                 pathname: '/pick',
                 state: {
@@ -122,13 +123,21 @@ const CreateRoom = () => {
             }}>
                 <Button>Start Swiping</Button>
             </Link>
-            
+
         </Card>
     </CreateRoomWrapper>
 }
 
-const getRoomCode = (years, genres, languages) => {
-    return "zVyE2";
+// hitting the endpoint with the parameters
+const getRoomCode = async (years, genres, languages) => {
+    const preferencesBody = {
+        languages,
+        types: genres,
+        years
+    }
+    console.log({ preferences: preferencesBody });
+    const roomCode = await axios.post('/groups', { preferences: preferencesBody });
+    return roomCode;
 }
 
 const getGenres = () => {

@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
   let id = createId();
   group.create({
     external_id: id,
-    group_preferences: JSON.stringify(req.query.preferences)
+    group_preferences: JSON.stringify(req.body.preferences)
   }).then(() => {
     res.send({ id });
   })
