@@ -23,7 +23,6 @@ router.post('/', function (req, res, next) {
 /* POST group user's song choices */
 router.post('/songs', async function (req, res, next) {
   let records = await createGroupSong(req.body.groupId, req.body.songIds);
-  console.log(records);
   groupSong.bulkCreate(records, { updateOnDuplicate: ['count'] }).then((created) => {
     res.send(created);
   });
