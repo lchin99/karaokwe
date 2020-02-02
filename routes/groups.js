@@ -32,7 +32,7 @@ router.post('/songs', async function (req, res, next) {
 router.get('/songs', async function (req, res) {
   try {
     let group = await group.findOne({ where: { external_id: req.query.groupId } });
-    let groupSongs = await groupSong.findAll({ where: { group_id: group.group_id } });
+    let groupSongs = await groupSong.findAll({ where: { group_id: group.group_id }, order: ['count', 'DESC'] });
     let songIds = [];
     groupSongs.forEach(groupSong => {
       songIds.push(groupSong.song_id);
