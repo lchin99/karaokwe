@@ -3,7 +3,7 @@ const sequelize = require('./sequelize')
 
 class Group extends Model { }
 Group.init({
-  id_group: {
+  group_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true

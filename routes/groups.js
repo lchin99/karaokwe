@@ -10,13 +10,18 @@ router.get('/', function (req, res, next) {
 
 /* POST group. */
 router.post('/', function (req, res, next) {
-  id = createId();
+  let id = createId();
   group.create({
     external_id: id
   }).then(() => {
     res.send({ id });
   })
 });
+
+/* POST group user's song choices */
+router.post('/songs', function (req, res, next) {
+
+})
 
 function createId() {
   const strOptions = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
