@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 import TinderCard from 'react-tinder-card'
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Button } from "../components/Base/basecomponents";
 
-const PickSongs = (props) => {
+const PickSongs = async (props) => {
     const roomCode = props.location.state.roomCode;
     const likedSongs = [];
 
@@ -14,21 +15,45 @@ const PickSongs = (props) => {
         }
     }
 
+    const [allSongs, setAllSongs] = React.useState([]);
+    const handleAllSongs = (newSongs) => {
+        setAllSongs(newSongs);
+    };
+
+    React.useEffect(() => {
+        getAllSongs(roomCode);
+    });
+
+    const getAllSongs = async (groupId) => {
+        const groupPreferences = await axios.get(`/groups/preferences?groupId=${groupId}`);
+        console.log(groupPreferences.data);
+
+        const params = {
+            languages: groupPreferences.data.languages,
+            types: groupPreferences.data.types,
+            years: groupPreferences.data.years
+        }
+
+        const songs = await axios.get('/songs', { params });
+
+        console.log(songs.data);
+        return handleAllSongs(songs.data);
+    }
+
     return <PickSongsWrapper>
         <H1White>Room Code: {roomCode}</H1White>
         <CardWrapper>
             <div className='cardContainer'>
-            {getAllSongs(roomCode).map((song) =>
-                <TinderCard className='swipe' key={song.song_id} onSwipe={(dir) => swiped(dir, song.song_id)}>
-                <TextCard song={song} />
-                </TinderCard>
-            )}
-            <Link to={{
-                pathname: '/final',
-                state: { roomCode }
-            }}>
-                <Button>Results</Button>
-            </Link>
+                {allSongs.length > 0 ? <h1>hey</h1> : allSongs.map(song =>
+                    <TinderCard className='swipe' key={song.song_id} onSwipe={(dir) => swiped(dir, song.song_id)}>
+                        <TextCard song={song} />
+                    </TinderCard>)}
+                <Link to={{
+                    pathname: '/final',
+                    state: { roomCode }
+                }}>
+                    <Button>Results</Button>
+                </Link>
             </div>
         </CardWrapper>
     </PickSongsWrapper>
@@ -41,81 +66,6 @@ const TextCard = ({ song }) => {
         <h4>Languages: {song.languages.map(language => language.language_name).join(", ")}</h4>
         <h4>Genres: {song.types.map(type => type.type_name).join(", ")}</h4>
     </div>
-}
-
-const getAllSongs = (roomCode) => {
-    return [
-        {
-          song_id: 27085,
-          song: "Lights Up",
-          artist: "Harry Styles",
-          year: 2019,
-          explicit: false,
-          languages: [
-            {
-              language_id: 2,
-              language_name: "English",
-              hasLanguage: {
-                song_id: 27085,
-                language_id: 2
-              }
-            },
-            {
-                language_id: 2,
-                language_name: "English",
-                hasLanguage: {
-                  song_id: 27085,
-                  language_id: 2
-                }
-              },
-              {
-                language_id: 2,
-                language_name: "English",
-                hasLanguage: {
-                  song_id: 27085,
-                  language_id: 2
-                }
-              },
-          ],
-          types: [
-            {
-              type_id: 33,
-              type_name: "Alternative",
-              hasType: {
-                song_id: 27085,
-                type_id: 33
-              }
-            }
-          ]
-        },
-        {
-          song_id: 27440,
-          song: "Cinnamon Girl",
-          artist: "Lana Del Rey",
-          year: 2019,
-          explicit: false,
-          languages: [
-            {
-              language_id: 2,
-              language_name: "English",
-              hasLanguage: {
-                song_id: 27440,
-                language_id: 2
-              }
-            }
-          ],
-          types: [
-            {
-              type_id: 33,
-              type_name: "Alternative",
-              hasType: {
-                song_id: 27440,
-                type_id: 33
-              }
-            }
-          ]
-        }
-      ];
 }
 
 const CardWrapper = styled.div``;
