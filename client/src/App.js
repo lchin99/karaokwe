@@ -37,18 +37,10 @@ function App() {
           }}
         >
         <Switch>
-          <Route path="/" exact>
-            <Start />
-          </Route>
-          <Route path="/create">
-            <CreateRoom />
-          </Route>
-          <Route path="/join">
-            <JoinRoom />
-          </Route>
-          <Route path="/pick">
-            <PickSongs />
-          </Route>
+          <Route path="/" exact component={Start} />
+          <Route path="/create"component={CreateRoom} />
+          <Route path="/join" component={JoinRoom} />
+          <Route path="/pick" component={PickSongs} />
         </Switch>
         </div>
         </div>

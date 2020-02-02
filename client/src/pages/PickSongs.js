@@ -3,8 +3,10 @@ import styled from "styled-components";
 import TinderCard from 'react-tinder-card'
 import { Wrapper } from "../components/Base/basecomponents";
 
-const PickSongs = () => {
+const PickSongs = (props) => {
+    console.log(props.location.state.roomCode)
     const likedSongs = [];
+
     const swiped = (direction, song_id) => {
         if (direction === "right") {
             likedSongs.push(song_id);
@@ -29,6 +31,7 @@ const TextCard = ({ song }) => {
         <h2>{song.song}</h2>
         <h4>Artist: {song.artist} <br /> Released: {song.year} </h4>
         <h4>Languages: {song.languages.map(language => language.language_name).join(", ")}</h4>
+        <h4>Genres: {song.types.map(type => type.type_name).join(", ")}</h4>
     </div>
 }
 

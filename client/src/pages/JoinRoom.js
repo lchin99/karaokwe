@@ -16,8 +16,13 @@ const JoinRoom = () => {
         <TextFieldWrapper>
           <TextField required id="standard-required" label="Room Code" onChange={handleRoomCodeChange} />
         </TextFieldWrapper>
-        <Link to="/pick">
-          <Button>Start Swiping</Button>
+        <Link to={{
+          pathname: '/pick',
+          state: {
+            roomCode
+          }
+        }}>
+        <Button>Start Swiping</Button>
         </Link>
       </Card>
     </Wrapper>

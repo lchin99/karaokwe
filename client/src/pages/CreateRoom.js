@@ -115,7 +115,12 @@ const CreateRoom = () => {
                     </Select>
             </FormControl>
             
-            <Link to="/pick">
+            <Link to={{
+                pathname: '/pick',
+                state: {
+                    roomCode: getRoomCode()
+                }
+            }}>
                 <Button>Start Swiping</Button>
             </Link>
             
