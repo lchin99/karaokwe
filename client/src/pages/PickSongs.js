@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import TinderCard from 'react-tinder-card'
+import { Link } from "react-router-dom";
+import { Button } from "../components/Base/basecomponents";
 
 const PickSongs = (props) => {
     const roomCode = props.location.state.roomCode;
@@ -21,6 +23,12 @@ const PickSongs = (props) => {
                 <TextCard song={song} />
                 </TinderCard>
             )}
+            <Link to={{
+                pathname: '/final',
+                state: { roomCode }
+            }}>
+                <Button>Results</Button>
+            </Link>
             </div>
         </CardWrapper>
     </PickSongsWrapper>

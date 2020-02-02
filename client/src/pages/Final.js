@@ -6,18 +6,23 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import styled from "styled-components";
+import { Wrapper } from "../components/Base/basecomponents"
 
-const Final = () => {
-    return <>
+const Final = (props) => {
+    const roomCode = props.location.state.roomCode;
+    return <FinalWrapper>
+        <InnerWrapper>
         <TableContainer component={Paper}>
             <Table aria-label="simple table">
                 <TableHead>
                 <TableRow>
-                    <TableCell align="right">ID</TableCell>
-                    <TableCell align="right">Name</TableCell>
-                    <TableCell align="right">Artist</TableCell>
-                    <TableCell align="right">Year</TableCell>
-                    <TableCell>Dessert (100g serving)</TableCell>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Artist</TableCell>
+                    <TableCell>Year</TableCell>
+                    <TableCell>Languages</TableCell>
+                    <TableCell>Genres</TableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
@@ -34,8 +39,14 @@ const Final = () => {
                 ))} */}
                 </TableBody>
             </Table>
-        </TableContainer>      
-    </>
+        </TableContainer>  
+        </InnerWrapper>    
+    </FinalWrapper>
 }
+
+const FinalWrapper = styled(Wrapper)``;
+const InnerWrapper = styled.div`
+    width: 75%;
+`;
 
 export default Final
