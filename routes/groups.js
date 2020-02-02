@@ -14,11 +14,23 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   let id = createId();
   group.create({
-    external_id: id
+    external_id: id,
+    group_preferences: JSON.stringify(req.query.preferences)
   }).then(() => {
     res.send({ id });
   })
 });
+
+/* GET preferences associated with groupId */
+router.get('/preferences', async function (req, res) {
+  try {
+    const group_data = await group.findOne({ where: { external_id: req.query.groupId } });
+    const preferences = group_data['group_preferences'];
+    res.send(JSON.parse(preferences));
+  } catch (error) {
+    console.error(error);
+  }
+})
 
 /* POST group user's song choices */
 router.post('/songs', async function (req, res, next) {

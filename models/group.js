@@ -12,6 +12,10 @@ Group.init({
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
+  },
+  group_preferences: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   sequelize,
