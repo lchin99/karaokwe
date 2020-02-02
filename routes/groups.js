@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
   let id = createId();
   group.create({
     external_id: id,
-    group_preferences: JSON.stringify(req.query.preferences)
+    group_preferences: JSON.stringify(req.body.preferences)
   }).then(() => {
     res.send({ id });
   })
@@ -43,13 +43,13 @@ router.post('/songs', async function (req, res, next) {
 /* GET songs associated with groupId */
 router.get('/songs', async function (req, res) {
   try {
-    let group = await group.findOne({ where: { external_id: req.query.groupId } });
-    let groupSongs = await groupSong.findAll({ where: { group_id: group.group_id }, order: ['count', 'DESC'] });
+    let existingGroup = await group.findOne({ where: { external_id: req.query.groupId } });
+    let groupSongs = await groupSong.findAll({ where: { group_id: existingGroup.group_id }, order: [['count', 'DESC']] });
     let songIds = [];
     groupSongs.forEach(groupSong => {
       songIds.push(groupSong.song_id);
     })
-    let songs = await song.findAll({ where: { song_id: songIds } });
+    let songs = await song.findAll({ where: { song_id: songIds }, include: [{ model: group }] });
     res.send(songs);
   } catch (error) {
     console.error(error);
@@ -72,7 +72,6 @@ async function createGroupSong(groupId, songIds) {
   let records = [];
   try {
     let existingGroup = await group.findOne({ where: { external_id: groupId } });
-
     for (const songId of songIds) {
       let existingGroupSong = await groupSong.findOne({ where: { group_id: existingGroup.group_id, song_id: songId } });
       if (existingGroupSong) {
