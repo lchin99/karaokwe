@@ -1,22 +1,29 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('./sequelize')
 
-class Group extends Model { }
-Group.init({
-  id_group: {
+class User extends Model { }
+User.init({
+  id_user: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  external_id: {
+  name: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  id_group: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true
+    references: {
+      model: 'Group',
+      key: 'id'
+    }
   }
 }, {
   sequelize,
-  modelName: 'group',
+  modelName: 'user',
   timestamps: false
 })
 
-module.exports = Group;
+module.exports = User;
