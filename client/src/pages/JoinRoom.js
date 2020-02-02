@@ -1,14 +1,30 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
-import { Button } from "../components/Base/basecomponents";
+import styled from "styled-components";
+import TextField from '@material-ui/core/TextField';
+import { Button, Card, Wrapper } from "../components/Base/basecomponents";
 
 const JoinRoom = () => {
-    return <div>
-        <p>JOIN ROOM PAGE</p>
+  const [roomCode, setRoomCode] = React.useState("");
+
+  const handleRoomCodeChange = event => {
+    setRoomCode(event.target.value);
+  }
+
+  return <Wrapper>
+      <Card>
+        <TextFieldWrapper>
+          <TextField required id="standard-required" label="Room Code" onChange={handleRoomCodeChange} />
+        </TextFieldWrapper>
         <Link to="/pick">
-          <Button>Pick</Button>
+          <Button>Start Swiping</Button>
         </Link>
-    </div>
+      </Card>
+    </Wrapper>
 }
+
+const TextFieldWrapper = styled.div`
+  margin: 20px;
+`;
 
 export default JoinRoom

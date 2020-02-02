@@ -1,7 +1,12 @@
 import React from 'react';
+import { Button, Card, Wrapper } from "../components/Base/basecomponents";
 
 const PickSongs = () => {
-    return <p>PICK SONGS PAGE</p>
+    return <Wrapper>
+        <Card>
+            <p>PICK SONGS PAGE</p>
+        </Card>
+    </Wrapper>
 }
 
 export default PickSongs

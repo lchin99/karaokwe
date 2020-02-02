@@ -22,3 +22,18 @@ export const Button = styled.button`
     outline-color: ${brightPink};
   }
 `
+export const Card = styled.div`
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+`;
+
+export const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+`;

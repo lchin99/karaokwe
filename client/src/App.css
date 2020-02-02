@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
-.example{
-  position:absolute !important;
-  }
+
+.MuiSlider-valueLabel {
+  font-size: 12px !important;
+}
