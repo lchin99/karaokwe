@@ -29,6 +29,8 @@ export const Card = styled.div`
     align-items: center;
     justify-content: center;
     background-color: white;
+    border-radius: 20px;
+    padding: 20px;
 `;
 
 export const Wrapper = styled.div`

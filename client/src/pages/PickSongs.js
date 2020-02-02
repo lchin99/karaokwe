@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import TinderCard from 'react-tinder-card'
 import axios from 'axios';
+import { Link } from "react-router-dom";
+import { Button } from "../components/Base/basecomponents";
 
 const PickSongs = async (props) => {
     const roomCode = props.location.state.roomCode;
@@ -46,6 +48,12 @@ const PickSongs = async (props) => {
                     <TinderCard className='swipe' key={song.song_id} onSwipe={(dir) => swiped(dir, song.song_id)}>
                         <TextCard song={song} />
                     </TinderCard>)}
+                <Link to={{
+                    pathname: '/final',
+                    state: { roomCode }
+                }}>
+                    <Button>Results</Button>
+                </Link>
             </div>
         </CardWrapper>
     </PickSongsWrapper>
