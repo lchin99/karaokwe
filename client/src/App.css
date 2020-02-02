@@ -47,8 +47,9 @@
 
 .cardContainer {
   width: 90vw;
-  max-width: 260px;
   height: 70vh;
+  display: flex;
+  justify-content: center;
 }
 
 .card {

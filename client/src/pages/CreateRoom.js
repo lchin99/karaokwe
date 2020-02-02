@@ -45,8 +45,7 @@ const CreateRoom = () => {
 
     return <CreateRoomWrapper>
         <Card>
-            <h2>Room Code: {getRoomCode()}</h2>
-            <h3>Set Parameters!</h3>
+            <h2>Set Your Parameters!</h2>
             <h4>Years: {value[0]} - {value[1]}</h4>
             <SliderWrapper>
                 <Slider
@@ -118,7 +117,7 @@ const CreateRoom = () => {
             <Link to={{
                 pathname: '/pick',
                 state: {
-                    roomCode: getRoomCode()
+                    roomCode: getRoomCode(value, genres, languages)
                 }
             }}>
                 <Button>Start Swiping</Button>
@@ -128,7 +127,7 @@ const CreateRoom = () => {
     </CreateRoomWrapper>
 }
 
-const getRoomCode = () => {
+const getRoomCode = (years, genres, languages) => {
     return "zVyE2";
 }
 

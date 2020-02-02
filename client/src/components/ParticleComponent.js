@@ -1,6 +1,5 @@
 import React from "react";
 import Particles from "react-particles-js";
-import { brightPink, pureWhite } from "./Base/colors";
 
 export default () => (
   <div

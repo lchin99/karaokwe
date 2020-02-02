@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 import TinderCard from 'react-tinder-card'
-import { Wrapper } from "../components/Base/basecomponents";
 
 const PickSongs = (props) => {
-    console.log(props.location.state.roomCode)
+    const roomCode = props.location.state.roomCode;
     const likedSongs = [];
 
     const swiped = (direction, song_id) => {
@@ -13,17 +12,18 @@ const PickSongs = (props) => {
         }
     }
 
-    return <Wrapper>
+    return <PickSongsWrapper>
+        <H1White>Room Code: {roomCode}</H1White>
         <CardWrapper>
             <div className='cardContainer'>
-            {getAllSongs().map((song) =>
+            {getAllSongs(roomCode).map((song) =>
                 <TinderCard className='swipe' key={song.song_id} onSwipe={(dir) => swiped(dir, song.song_id)}>
                 <TextCard song={song} />
                 </TinderCard>
             )}
             </div>
         </CardWrapper>
-    </Wrapper>
+    </PickSongsWrapper>
 }
 
 const TextCard = ({ song }) => {
@@ -35,7 +35,7 @@ const TextCard = ({ song }) => {
     </div>
 }
 
-const getAllSongs = () => {
+const getAllSongs = (roomCode) => {
     return [
         {
           song_id: 27085,
@@ -111,5 +111,15 @@ const getAllSongs = () => {
 }
 
 const CardWrapper = styled.div``;
+const PickSongsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+`;
+const H1White = styled.h1`
+    color: white;
+`;
 
 export default PickSongs

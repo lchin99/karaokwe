@@ -9,6 +9,7 @@ import Start from './pages/Start';
 import CreateRoom from './pages/CreateRoom';
 import JoinRoom from './pages/JoinRoom';
 import PickSongs from './pages/PickSongs';
+import Final from './pages/Final';
 import ParticleComponent from './components/ParticleComponent';
 import { brightPink } from "./components/Base/colors";
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/create"component={CreateRoom} />
           <Route path="/join" component={JoinRoom} />
           <Route path="/pick" component={PickSongs} />
+          <Route path="/final" component={Final} />
         </Switch>
         </div>
         </div>
